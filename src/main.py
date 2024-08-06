@@ -8,7 +8,6 @@ import os
 # Login page URL
 URL = 'https://membros.devaprender.com/'
 
-
 def get_chrome_options(download_path='/home/lonewolf/Downloads'):
     """
     Configure Chrome options for the WebDriver.
@@ -38,7 +37,6 @@ def get_chrome_options(download_path='/home/lonewolf/Downloads'):
     
     return chrome_options
 
-
 def start_driver(chrome_options):
     """
     Initialize and return the Chrome WebDriver.
@@ -51,7 +49,6 @@ def start_driver(chrome_options):
     """
     # Initialize the Chrome WebDriver with the specified options
     return webdriver.Chrome(options=chrome_options)
-
 
 def load_credentials(env_file='.env'):
     """
@@ -74,7 +71,6 @@ def load_credentials(env_file='.env'):
     
     return user_email, password
 
-
 def login(driver, user_email, password):
     """
     Automate the login process on the web page.
@@ -86,11 +82,13 @@ def login(driver, user_email, password):
     """
     # Locate the email field and enter the user email
     driver.find_element(By.ID, 'AcessoEmail').send_keys(user_email)
+    sleep(2)
     # Locate the password field and enter the user password
     driver.find_element(By.ID, 'AcessoSenha').send_keys(password)
+    sleep(2)
     # Locate and click the login button
     driver.find_element(By.CLASS_NAME, 'auth-btn').click()
-
+    sleep(2)
 
 def main():
     """
@@ -105,7 +103,7 @@ def main():
         # Open the login page URL
         driver.get(URL)
         # Wait for the page to load
-        sleep(10)
+        sleep(5)
 
         # Load user credentials from the .env file
         user_email, password = load_credentials()
@@ -117,7 +115,6 @@ def main():
     finally:
         # Close the browser window
         driver.quit()
-
 
 if __name__ == '__main__':
     main()
